@@ -51,8 +51,8 @@ function App() {
         data = JSON.parse(data);
       }
 
-      if (data.flashcards && Array.isArray(data.flashcards)) {
-        setFlashcards(data.flashcards);
+      if (data && Array.isArray(data)) {
+        setFlashcards(data);
       } else {
         throw new Error('Flashcards data not in expected format');
       }
