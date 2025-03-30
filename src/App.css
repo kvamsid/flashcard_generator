@@ -1,0 +1,224 @@
+.app {
+  /* A semi-transparent card on top of the gradient background */
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+
+  /* In light mode, we'll override the background a bit */
+}
+
+@media (prefers-color-scheme: light) {
+  .app {
+    background-color: #ffffff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.app h1 {
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  text-align: center;
+  color: #ffd369; /* Title color in dark mode */
+}
+
+/* Section containing the text/PDF input controls */
+.input-section {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Toggle buttons for selecting input type */
+.input-type-toggle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.input-type-toggle button {
+  margin: 0 5px;
+  padding: 10px 20px;
+  background: #ffd369;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.input-type-toggle button:hover {
+  background: #ffb830;
+}
+
+/* Active toggle button */
+.input-type-toggle button.active {
+  background: #ffb830;
+  border: 2px solid #ffd369;
+  color: #fff;
+}
+
+/* Textarea and file input styling */
+textarea,
+input[type="file"] {
+  width: 100%;
+  max-width: 600px;
+  padding: 10px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border: 2px solid #ffd369;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+  background-color: #fafafa;
+}
+
+/* Dark-mode overrides for inputs */
+@media (prefers-color-scheme: dark) {
+  textarea,
+  input[type="file"] {
+    background-color: #333;
+    color: #fff;
+  }
+}
+
+/* "Generate Flashcards" button */
+button.generate-btn {
+  background: #ff9234;
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  margin-top: 10px;
+}
+
+button.generate-btn:hover {
+  background: #ff7518;
+}
+
+button.generate-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Flashcards section */
+.flashcards-section {
+  margin-top: 30px;
+}
+
+.flashcards-section h2 {
+  margin-bottom: 20px;
+  text-align: center;
+  color: #ffd369;
+}
+
+.flashcards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* The flashcard wrapper - made larger for better visibility */
+.flashcard {
+  width: 400px;
+  height: 250px;
+  perspective: 1000px; /* For the 3D flip effect */
+}
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* On hover, flip the card */
+.flashcard:hover .flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+/* Front and back faces */
+.flashcard-front,
+.flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.flashcard-front {
+  background: #fafafa;
+  border: 2px solid #ffd369;
+}
+
+.flashcard-back {
+  background: #ffe8cc;
+  border: 2px solid #ffd369;
+  transform: rotateY(180deg);
+}
+
+/* Dark-mode overrides for flashcards */
+@media (prefers-color-scheme: dark) {
+  .flashcard-front {
+    background: #333;
+    border: 2px solid #ffd369;
+    color: #fff;
+  }
+  .flashcard-back {
+    background: #444;
+    border: 2px solid #ffd369;
+    color: #fff;
+  }
+}
+
+.flashcard-text {
+  font-size: 1rem;
+  text-align: center;
+}
+
+/* Navigation buttons (Previous/Next) */
+.navigation-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto 0 auto;
+}
+
+.navigation-buttons button {
+  background-color: #ff9234;
+  color: #fff;
+  border: none;
+  padding: 10px 25px;
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.3s;
+}
+
+.navigation-buttons button:hover {
+  background-color: #ff7518;
+}
+
+.navigation-buttons button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
