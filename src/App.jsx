@@ -22,28 +22,6 @@ function App() {
     setFlashcards([]);
     try {
       let response;
-      // if (inputType === 'text') {
-      //   response = await fetch('https://https-github-com-adelinrovay-wics.onrender.com/textFlashCards/', {
-      //     method: 'POST',
-      //     headers: { 'Content-Type': 'application/json' },
-      //     body: JSON.stringify({
-      //       input: inputValue,
-      //       type: 'text',
-      //     }),
-      //   });
-      // } else if (inputType === 'pdf') {
-      //   if (!pdfFile) {
-      //     alert('Please select a PDF file.');
-      //     setLoading(false);
-      //     return;
-      //   }
-      //   const formData = new FormData();
-      //   formData.append('file', pdfFile);
-      //   response = await fetch('https://https-github-com-adelinrovay-wics.onrender.com/pdfFlashCards/', {
-      //     method: 'POST',
-      //     body: formData,
-      //   });
-      // }
 
       if (inputType === 'text') {
         response = await fetch('https://https-github-com-adelinrovay-wics.onrender.com/textFlashCards/', {

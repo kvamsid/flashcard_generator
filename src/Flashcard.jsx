@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css'; // Optional if styling separately
+import './App.css';
 
 const Flashcard = ({ question, answer, onNext, onPrev }) => {
   return (
