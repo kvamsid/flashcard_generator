@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './App.css';
 import Flashcard from './Flashcard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBolt } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [inputType, setInputType] = useState('text');
@@ -77,7 +79,11 @@ function App() {
 
   return (
     <div className="app">
-      <h1>FlashLearn MVP</h1>
+      <h1>
+        Flash
+        <FontAwesomeIcon icon={faBolt} style={{ marginLeft: '10px', marginRight: '10px', color: '#f9d976' }} />
+        Learn
+      </h1>
 
       <div className="input-section">
         <div className="input-type-toggle">
@@ -118,7 +124,7 @@ function App() {
             placeholder="Paste your notes or document text here..."
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            rows={10}
+            rows={6}
           />
         ) : (
           <input
