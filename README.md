@@ -1,6 +1,11 @@
 ## ✨ About the Project: Flash⚡️Learn  
 **Tagline:** *From learning to revising — all in a flash.*
 
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-blue)](https://flashcard-generator-xi.vercel.app/)
+
+![Project Preview](./Project_Preview.png)
+
 ---
 
 ### 🚀 Inspiration
