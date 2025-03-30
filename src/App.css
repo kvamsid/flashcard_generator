@@ -280,3 +280,30 @@ button.generate-btn:disabled {
   }
 }
 
+.file-upload-label {
+  display: inline-flex;
+  align-items: center;
+  background-color: #1f1f1f;
+  color: #e5e5e5;
+  border: 2px solid #ffd369;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 10px;
+}
+
+.file-upload-label:hover {
+  background-color: #2c2c2c;
+}
+
+.file-name {
+  margin-top: 8px;
+  display: inline-block;
+  color: #ccc;
+  font-size: 0.95rem;
+}
+
+

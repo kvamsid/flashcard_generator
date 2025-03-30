@@ -1,10 +1,16 @@
 import React from 'react';
 import './App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faChevronLeft,faChevronRight
+} from '@fortawesome/free-solid-svg-icons';
 
 const Flashcard = ({ question, answer, onNext, onPrev }) => {
   return (
     <div className="flashcard-wrapper">
-      <button className="arrow-button left" onClick={onPrev}>&#8592;</button>
+      <button className="arrow-button left" onClick={onPrev}>
+      <FontAwesomeIcon icon={faChevronLeft} />
+      </button>
 
       <div className="flashcard">
         <div className="flashcard-inner">
@@ -21,7 +27,9 @@ const Flashcard = ({ question, answer, onNext, onPrev }) => {
         </div>
       </div>
 
-      <button className="arrow-button right" onClick={onNext}>&#8594;</button>
+      <button className="arrow-button right" onClick={onNext}>
+      <FontAwesomeIcon icon={faChevronRight} />
+      </button>
     </div>
   );
 };

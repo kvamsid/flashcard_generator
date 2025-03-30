@@ -2,7 +2,15 @@ import React, { useState } from 'react';
 import './App.css';
 import Flashcard from './Flashcard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBolt } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBolt,
+  faFileLines,
+  faFilePdf,
+  faPaperclip,
+  faWandMagicSparkles,
+  faChevronLeft,
+  faChevronRight,
+} from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const [inputType, setInputType] = useState('text');
@@ -43,7 +51,7 @@ function App() {
           method: 'POST',
           body: formData,
         });
-      }      
+      }
 
       const responseText = await response.text();
       let data = JSON.parse(responseText);
@@ -68,9 +76,7 @@ function App() {
   };
 
   const handlePrevious = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + flashcards.length) % flashcards.length
-    );
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + flashcards.length) % flashcards.length);
   };
 
   const shouldShowGenerateButton =
@@ -94,6 +100,7 @@ function App() {
               setPdfFile(null);
             }}
           >
+            <FontAwesomeIcon icon={faFileLines} style={{ marginRight: '8px' }} />
             Text Input
           </button>
           <button
@@ -103,9 +110,11 @@ function App() {
               setInputValue('');
             }}
           >
+            <FontAwesomeIcon icon={faFilePdf} style={{ marginRight: '8px' }} />
             Upload PDF
           </button>
         </div>
+
         <div className="difficulty-select">
           <label htmlFor="difficulty">Difficulty:</label>
           <select
@@ -127,11 +136,20 @@ function App() {
             rows={6}
           />
         ) : (
-          <input
-            type="file"
-            accept="application/pdf"
-            onChange={handleFileChange}
-          />
+          <>
+            <label htmlFor="pdf-upload" className="file-upload-label">
+              <FontAwesomeIcon icon={faPaperclip} style={{ marginRight: '8px' }} />
+              Choose PDF
+              <input
+                id="pdf-upload"
+                type="file"
+                accept="application/pdf"
+                onChange={handleFileChange}
+                hidden
+              />
+            </label>
+            {pdfFile && <span className="file-name">{pdfFile.name}</span>}
+          </>
         )}
 
         {shouldShowGenerateButton && (
@@ -140,6 +158,7 @@ function App() {
             onClick={generateFlashcards}
             disabled={loading}
           >
+            <FontAwesomeIcon icon={faWandMagicSparkles} style={{ marginRight: '8px' }} />
             {loading ? 'Generating...' : 'Generate Flashcards'}
           </button>
         )}
@@ -154,7 +173,6 @@ function App() {
               onNext={handleNext}
               onPrev={handlePrevious}
             />
-
           </div>
         )}
       </div>
