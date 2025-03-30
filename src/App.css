@@ -1,30 +1,29 @@
 .app {
-  /* A semi-transparent card on top of the gradient background */
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 12px;
-  max-width: 900px;
+  max-width: 1100px; /* Slightly bigger for XL screens */
   margin: 40px auto;
   padding: 30px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-
-  /* In light mode, we'll override the background a bit */
+  color: #e5e5e5;
 }
 
 @media (prefers-color-scheme: light) {
   .app {
     background-color: #ffffff;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    color: #222;
   }
 }
 
 .app h1 {
   margin-bottom: 1.5rem;
-  font-size: 2rem;
+  font-size: 2.5rem;
   text-align: center;
-  color: #ffd369; /* Title color in dark mode */
+  color: #f9d976;
 }
 
-/* Section containing the text/PDF input controls */
+/* Input Section */
 .input-section {
   margin-bottom: 30px;
   display: flex;
@@ -32,7 +31,6 @@
   align-items: center;
 }
 
-/* Toggle buttons for selecting input type */
 .input-type-toggle {
   display: flex;
   justify-content: center;
@@ -42,27 +40,26 @@
 .input-type-toggle button {
   margin: 0 5px;
   padding: 10px 20px;
-  background: #ffd369;
-  color: #333;
+  background: #f9d976;
+  color: #222;
   border: none;
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
 }
 
 .input-type-toggle button:hover {
-  background: #ffb830;
+  background: #f0c14b;
 }
 
-/* Active toggle button */
 .input-type-toggle button.active {
   background: #ffb830;
-  border: 2px solid #ffd369;
-  color: #fff;
+  border: 2px solid #f9d976;
+  color: #1a1a1a;
 }
 
-/* Textarea and file input styling */
+/* Textarea and File Input */
 textarea,
 input[type="file"] {
   width: 100%;
@@ -74,28 +71,29 @@ input[type="file"] {
   border-radius: 6px;
   font-size: 1rem;
   outline: none;
-  background-color: #fafafa;
+  background-color: #1f1f1f;
+  color: #e5e5e5;
 }
 
-/* Dark-mode overrides for inputs */
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   textarea,
   input[type="file"] {
-    background-color: #333;
-    color: #fff;
+    background-color: #fafafa;
+    color: #222;
   }
 }
 
-/* "Generate Flashcards" button */
+/* Generate Flashcards Button */
 button.generate-btn {
   background: #ff9234;
-  color: #fff;
+  color: #000;
   padding: 10px 25px;
   border-radius: 6px;
   font-size: 1rem;
   font-weight: 600;
   border: none;
   margin-top: 10px;
+  transition: background 0.3s ease;
 }
 
 button.generate-btn:hover {
@@ -104,10 +102,11 @@ button.generate-btn:hover {
 
 button.generate-btn:disabled {
   background: #ccc;
+  color: #666;
   cursor: not-allowed;
 }
 
-/* Flashcards section */
+/* Flashcard Section */
 .flashcards-section {
   margin-top: 30px;
 }
@@ -115,7 +114,7 @@ button.generate-btn:disabled {
 .flashcards-section h2 {
   margin-bottom: 20px;
   text-align: center;
-  color: #ffd369;
+  color: #f9d976;
 }
 
 .flashcards-container {
@@ -125,11 +124,23 @@ button.generate-btn:disabled {
   gap: 20px;
 }
 
-/* The flashcard wrapper - made larger for better visibility */
+/* Flashcard & Wrapper */
+.flashcard-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 350px;
+}
+
 .flashcard {
-  width: 400px;
-  height: 250px;
-  perspective: 1000px; /* For the 3D flip effect */
+  width: 100%;
+  max-width: 600px;
+  height: 350px;
+  perspective: 1000px;
 }
 
 .flashcard-inner {
@@ -141,58 +152,80 @@ button.generate-btn:disabled {
   transform-style: preserve-3d;
 }
 
-/* On hover, flip the card */
 .flashcard:hover .flashcard-inner {
   transform: rotateY(180deg);
 }
 
-/* Front and back faces */
 .flashcard-front,
 .flashcard-back {
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+  border-radius: 12px;
   backface-visibility: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 15px;
+  padding: 20px;
   box-sizing: border-box;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .flashcard-front {
-  background: #fafafa;
+  background: #1f1f1f;
+  color: #e5e5e5;
   border: 2px solid #ffd369;
 }
 
 .flashcard-back {
-  background: #ffe8cc;
+  background: #2c2c2c;
+  color: #e5e5e5;
   border: 2px solid #ffd369;
   transform: rotateY(180deg);
 }
 
-/* Dark-mode overrides for flashcards */
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: light) {
   .flashcard-front {
-    background: #333;
-    border: 2px solid #ffd369;
-    color: #fff;
+    background: #fafafa;
+    color: #222;
   }
+
   .flashcard-back {
-    background: #444;
-    border: 2px solid #ffd369;
-    color: #fff;
+    background: #ffe8cc;
+    color: #222;
   }
 }
 
-.flashcard-text {
-  font-size: 1rem;
-  text-align: center;
+/* Arrow Buttons */
+.arrow-button {
+  background-color: transparent;
+  border: none;
+  color: #ffd369;
+  font-size: 2.5rem;
+  cursor: pointer;
+  padding: 0 15px;
+  transition: transform 0.2s ease;
+  z-index: 1;
 }
 
-/* Navigation buttons (Previous/Next) */
+.arrow-button:hover {
+  transform: scale(1.2);
+  color: #ffb830;
+}
+
+.arrow-button.left {
+  position: absolute;
+  left: -60px;
+}
+
+.arrow-button.right {
+  position: absolute;
+  right: -60px;
+}
+
+/* Fallback Navigation Buttons (optional if arrows used on card) */
 .navigation-buttons {
   margin-top: 20px;
   display: flex;
@@ -204,14 +237,14 @@ button.generate-btn:disabled {
 
 .navigation-buttons button {
   background-color: #ff9234;
-  color: #fff;
+  color: #000;
   border: none;
   padding: 10px 25px;
   cursor: pointer;
   border-radius: 6px;
   font-size: 1rem;
   font-weight: 600;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
 .navigation-buttons button:hover {
@@ -220,5 +253,36 @@ button.generate-btn:disabled {
 
 .navigation-buttons button:disabled {
   background-color: #ccc;
+  color: #666;
   cursor: not-allowed;
 }
+
+.difficulty-select {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.difficulty-select label {
+  color: #f9d976;
+}
+
+.difficulty-select select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 2px solid #ffd369;
+  background-color: #1f1f1f;
+  color: #e5e5e5;
+  font-size: 1rem;
+  outline: none;
+}
+
+@media (prefers-color-scheme: light) {
+  .difficulty-select select {
+    background-color: #fafafa;
+    color: #222;
+  }
+}
+

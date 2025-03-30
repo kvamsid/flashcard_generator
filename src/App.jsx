@@ -3,13 +3,13 @@ import './App.css';
 import Flashcard from './Flashcard';
 
 function App() {
-  // 'pdf' or 'text'
   const [inputType, setInputType] = useState('text');
   const [inputValue, setInputValue] = useState('');
   const [pdfFile, setPdfFile] = useState(null);
   const [flashcards, setFlashcards] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [difficulty, setDifficulty] = useState('Moderate');
 
   const handleFileChange = (e) => {
     if (e.target.files.length > 0) {
@@ -22,6 +22,29 @@ function App() {
     setFlashcards([]);
     try {
       let response;
+      // if (inputType === 'text') {
+      //   response = await fetch('https://https-github-com-adelinrovay-wics.onrender.com/textFlashCards/', {
+      //     method: 'POST',
+      //     headers: { 'Content-Type': 'application/json' },
+      //     body: JSON.stringify({
+      //       input: inputValue,
+      //       type: 'text',
+      //     }),
+      //   });
+      // } else if (inputType === 'pdf') {
+      //   if (!pdfFile) {
+      //     alert('Please select a PDF file.');
+      //     setLoading(false);
+      //     return;
+      //   }
+      //   const formData = new FormData();
+      //   formData.append('file', pdfFile);
+      //   response = await fetch('https://https-github-com-adelinrovay-wics.onrender.com/pdfFlashCards/', {
+      //     method: 'POST',
+      //     body: formData,
+      //   });
+      // }
+
       if (inputType === 'text') {
         response = await fetch('https://https-github-com-adelinrovay-wics.onrender.com/textFlashCards/', {
           method: 'POST',
@@ -29,21 +52,18 @@ function App() {
           body: JSON.stringify({
             input: inputValue,
             type: 'text',
+            difficulty: difficulty,
           }),
         });
       } else if (inputType === 'pdf') {
-        if (!pdfFile) {
-          alert('Please select a PDF file.');
-          setLoading(false);
-          return;
-        }
         const formData = new FormData();
         formData.append('file', pdfFile);
+        formData.append('difficulty', difficulty);
         response = await fetch('https://https-github-com-adelinrovay-wics.onrender.com/pdfFlashCards/', {
           method: 'POST',
           body: formData,
         });
-      }
+      }      
 
       const responseText = await response.text();
       let data = JSON.parse(responseText);
@@ -73,6 +93,10 @@ function App() {
     );
   };
 
+  const shouldShowGenerateButton =
+    (inputType === 'text' && inputValue.trim() !== '') ||
+    (inputType === 'pdf' && pdfFile);
+
   return (
     <div className="app">
       <h1>FlashLearn MVP</h1>
@@ -98,6 +122,18 @@ function App() {
             Upload PDF
           </button>
         </div>
+        <div className="difficulty-select">
+          <label htmlFor="difficulty">Difficulty:</label>
+          <select
+            id="difficulty"
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value)}
+          >
+            <option value="Beginner">Beginner</option>
+            <option value="Moderate">Moderate</option>
+            <option value="Advanced">Advanced</option>
+          </select>
+        </div>
 
         {inputType === 'text' ? (
           <textarea
@@ -114,38 +150,27 @@ function App() {
           />
         )}
 
-        <button
-          className="generate-btn"
-          onClick={generateFlashcards}
-          disabled={
-            loading ||
-            ((inputType === 'text' && !inputValue) ||
-              (inputType === 'pdf' && !pdfFile))
-          }
-        >
-          {loading ? 'Generating...' : 'Generate Flashcards'}
-        </button>
+        {shouldShowGenerateButton && (
+          <button
+            className="generate-btn"
+            onClick={generateFlashcards}
+            disabled={loading}
+          >
+            {loading ? 'Generating...' : 'Generate Flashcards'}
+          </button>
+        )}
       </div>
 
       <div className="flashcards-section">
-        {flashcards.length > 0 && <h2>Generated Flashcards:</h2>}
         {flashcards.length > 0 && (
           <div className="flashcards-container">
             <Flashcard
               question={flashcards[currentIndex].question}
               answer={flashcards[currentIndex].answer}
+              onNext={handleNext}
+              onPrev={handlePrevious}
             />
-          </div>
-        )}
 
-        {flashcards.length > 0 && (
-          <div className="navigation-buttons">
-            <button onClick={handlePrevious}>
-              &lt; Previous
-            </button>
-            <button onClick={handleNext}>
-              Next &gt;
-            </button>
           </div>
         )}
       </div>
